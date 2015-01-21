@@ -51,7 +51,7 @@ public class Matrix
 
     public Matrix(int iRows, int iCols)         // Matrix Class constructor
     {
-        mat = new double[rows, cols];
+        mat = new double[iRows, iCols];
     }
 
     public Boolean IsSquare()
