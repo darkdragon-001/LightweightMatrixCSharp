@@ -4,12 +4,12 @@
     Faculty of Mathematics and Physics
     Charles University in Prague
     (C) 2010
-    - updated on 1. 6.2014 - Trimming the string before parsing
-    - updated on 14.6.2012 - parsing improved. Thanks to Andy!
-    - updated on 3.10.2012 - there was a terrible bug in LU, SoLE and Inversion. Thanks to Danilo Neves Cruz for reporting that!
+    - updated on 01.06.2014 - Trimming the string before parsing
+    - updated on 14.06.2012 - parsing improved. Thanks to Andy!
+    - updated on 03.10.2012 - there was a terrible bug in LU, SoLE and Inversion. Thanks to Danilo Neves Cruz for reporting that!
+    - updated on 21.01.2014 - multiple changes based on comments -> see git for further info
 	
     This code is distributed under MIT licence.
-	
 	
 		Permission is hereby granted, free of charge, to any person
 		obtaining a copy of this software and associated documentation
