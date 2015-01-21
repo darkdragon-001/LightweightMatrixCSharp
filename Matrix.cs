@@ -39,8 +39,8 @@ using System.Text.RegularExpressions;
 
 public class Matrix
 {
-    public int rows;
-    public int cols;
+    public int rows { get { return mat.GetLength(0); } }
+    public int cols { get { return mat.GetLength(1); } }
     public double[,] mat;
 
     public Matrix L;
@@ -50,8 +50,6 @@ public class Matrix
 
     public Matrix(int iRows, int iCols)         // Matrix Class constructor
     {
-        rows = iRows;
-        cols = iCols;
         mat = new double[rows, cols];
     }
 
@@ -259,7 +257,7 @@ public class Matrix
                 for (int j = 0; j < nums.Length; j++) matrix[i, j] = double.Parse(nums[j]);
             }
         }
-        catch (FormatException exc) { throw new MException("Wrong input format!"); }
+        catch (FormatException) { throw new MException("Wrong input format!"); }
         return matrix;
     }
 
