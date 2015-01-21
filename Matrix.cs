@@ -40,9 +40,9 @@ using System.Text.RegularExpressions;
 
 public class Matrix
 {
-    public int rows { get { return mat.GetLength(0); } }
-    public int cols { get { return mat.GetLength(1); } }
-    public double[,] mat;
+    public int rows;
+    public int cols;
+    public double[] mat;
 
     public Matrix L;
     public Matrix U;
@@ -51,7 +51,9 @@ public class Matrix
 
     public Matrix(int iRows, int iCols)         // Matrix Class constructor
     {
-        mat = new double[iRows, iCols];
+        rows = iRows;
+        cols = iCols;
+        mat = new double[rows * cols];
     }
 
     public Boolean IsSquare()
@@ -61,8 +63,8 @@ public class Matrix
 
     public double this[int iRow, int iCol]      // Access this matrix as a 2D array
     {
-        get { return mat[iRow, iCol]; }
-        set { mat[iRow, iCol] = value; }
+        get { return mat[iRow * rows + iCol]; }
+        set { mat[iRow * rows + iCol] = value; }
     }
 
     public Matrix GetCol(int k)
