@@ -1,7 +1,7 @@
 # LightweightMatrixC\# 
 
 ## Preface
-Lightweight fast matrix class in C# based on [http://blog.ivank.net/](http://blog.ivank.net/).  
+Lightweight fast matrix class in C# based on [http://blog.ivank.net/](http://blog.ivank.net/lightweight-matrix-class-in-c-strassen-algorithm-lu-decomposition.html).  
 I also did some changes based on the comments on the original page.
 
 ## Documentation
