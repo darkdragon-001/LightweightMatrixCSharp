@@ -128,7 +128,6 @@ public class Matrix
         }
     }
 
-
     public Matrix SolveWith(Matrix v)                        // Function solves Ax = v in confirmity with solution vector "v"
     {
         if (rows != cols) throw new MException("The matrix is not square!");
@@ -142,6 +141,48 @@ public class Matrix
         Matrix x = SubsBack(U, z);
 
         return x;
+    }
+
+    // TODO check for redundancy with MakeLU() and SolveWith()
+    public void MakeRref()                                    // Function makes reduced echolon form
+    {
+        int lead = 0;
+        for (int r = 0; r < rows; r++)
+        {
+            if (cols <= lead) break;
+            int i = r;
+            while (mat[i, lead] == 0)
+            {
+                i++;
+                if (i == rows)
+                {
+                    i = r;
+                    lead++;
+                    if (cols == lead)
+                    {
+                        lead--;
+                        break;
+                    }
+                }
+            }
+            for (int j = 0; j < cols; j++)
+            {
+                double temp = mat[r, j];
+                mat[r, j] = mat[i, j];
+                mat[i, j] = temp;
+            }
+            double div = mat[r, lead];
+            for (int j = 0; j < cols; j++) mat[r, j] /= div;
+            for (int j = 0; j < rows; j++)
+            {
+                if (j != r)
+                {
+                    double sub = mat[j, lead];
+                    for (int k = 0; k < cols; k++) mat[j, k] -= (sub * mat[r, k]);
+                }
+            }
+            lead++;
+        }
     }
 
     public Matrix Invert()                                   // Function returns the inverted matrix
