@@ -68,13 +68,13 @@ public class Matrix
     public Matrix GetCol(int k)
     {
         Matrix m = new Matrix(rows, 1);
-        for (int i = 0; i < rows; i++) m[i, 0] = mat[i, k];
+        for (int i = 0; i < rows; i++) m[i, 0] = this[i, k];
         return m;
     }
 
     public void SetCol(Matrix v, int k)
     {
-        for (int i = 0; i < rows; i++) mat[i, k] = v[i, 0];
+        for (int i = 0; i < rows; i++) this[i, k] = v[i, 0];
     }
 
     public void MakeLU()                        // Function for LU decomposition
@@ -151,7 +151,7 @@ public class Matrix
         {
             if (cols <= lead) break;
             int i = r;
-            while (mat[i, lead] == 0)
+            while (this[i, lead] == 0)
             {
                 i++;
                 if (i == rows)
@@ -167,18 +167,18 @@ public class Matrix
             }
             for (int j = 0; j < cols; j++)
             {
-                double temp = mat[r, j];
-                mat[r, j] = mat[i, j];
-                mat[i, j] = temp;
+                double temp = this[r, j];
+                this[r, j] = this[i, j];
+                this[i, j] = temp;
             }
-            double div = mat[r, lead];
-            for (int j = 0; j < cols; j++) mat[r, j] /= div;
+            double div = this[r, lead];
+            for (int j = 0; j < cols; j++) this[r, j] /= div;
             for (int j = 0; j < rows; j++)
             {
                 if (j != r)
                 {
-                    double sub = mat[j, lead];
-                    for (int k = 0; k < cols; k++) mat[j, k] -= (sub * mat[r, k]);
+                    double sub = this[j, lead];
+                    for (int k = 0; k < cols; k++) this[j, k] -= (sub * this[r, k]);
                 }
             }
             lead++;
@@ -224,7 +224,7 @@ public class Matrix
         Matrix matrix = new Matrix(rows, cols);
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < cols; j++)
-                matrix[i, j] = mat[i, j];
+                matrix[i, j] = this[i, j];
         return matrix;
     }
 
@@ -309,7 +309,7 @@ public class Matrix
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
-                s.Append(String.Format("{0,5:E2}", mat[i, j]) + " ");
+                s.Append(String.Format("{0,5:E2}", this[i, j]) + " ");
             s.AppendLine();
         }
         return s.ToString();
