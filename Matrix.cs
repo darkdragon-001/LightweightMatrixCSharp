@@ -34,6 +34,7 @@
 */
 
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 
@@ -263,13 +264,14 @@ public class Matrix
 
     public override string ToString()                           // Function returns matrix as a string
     {
-        string s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < cols; j++) s += String.Format("{0,5:0.00}", mat[i, j]) + " ";
-            s += "\r\n";
+            for (int j = 0; j < cols; j++)
+                s.Append(String.Format("{0,5:E2}", mat[i, j]) + " ");
+            s.AppendLine();
         }
-        return s;
+        return s.ToString();
     }
 
     public static Matrix Transpose(Matrix m)              // Matrix transpose, for any rectangular matrix
