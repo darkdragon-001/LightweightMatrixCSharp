@@ -394,6 +394,7 @@ public class Matrix
             for (int j = 0; j < size; j++) C[i, j] = A[ya + i, xa + j];
     }
 
+    // TODO assume matrix 2^N x 2^N and then directly call StrassenMultiplyRun(A,B,?,1,?)
     private static Matrix StrassenMultiply(Matrix A, Matrix B)                // Smart matrix multiplication
     {
         if (A.cols != B.rows) throw new MException("Wrong dimension of matrix!");
@@ -401,16 +402,6 @@ public class Matrix
         Matrix R;
 
         int msize = Math.Max(Math.Max(A.rows, A.cols), Math.Max(B.rows, B.cols));
-
-        if (msize < 32)
-        {
-            R = ZeroMatrix(A.rows, B.cols);
-            for (int i = 0; i < R.rows; i++)
-                for (int j = 0; j < R.cols; j++)
-                    for (int k = 0; k < A.cols; k++)
-                        R[i, j] += A[i, k] * B[k, j];
-            return R;
-        }
 
         int size = 1; int n = 0;
         while (msize > size) { size *= 2; n++; };
@@ -485,24 +476,10 @@ public class Matrix
 
         return R;
     }
-
-    // function for square matrix 2^N x 2^N
-
     private static void StrassenMultiplyRun(Matrix A, Matrix B, Matrix C, int l, Matrix[,] f)    // A * B into C, level of recursion, matrix field
     {
         int size = A.rows;
         int h = size / 2;
-
-        if (size < 32)
-        {
-            for (int i = 0; i < C.rows; i++)
-                for (int j = 0; j < C.cols; j++)
-                {
-                    C[i, j] = 0;
-                    for (int k = 0; k < A.cols; k++) C[i, j] += A[i, k] * B[k, j];
-                }
-            return;
-        }
 
         AplusBintoC(A, 0, 0, A, h, h, f[l, 0], h);
         AplusBintoC(B, 0, 0, B, h, h, f[l, 1], h);
@@ -552,8 +529,7 @@ public class Matrix
             for (int j = h; j < size; j++)     // cols
                 C[i, j] = f[l, 1 + 1][i - h, j - h] - f[l, 1 + 2][i - h, j - h] + f[l, 1 + 3][i - h, j - h] + f[l, 1 + 6][i - h, j - h];
     }
-
-    public static Matrix StupidMultiply(Matrix m1, Matrix m2)                  // Stupid matrix multiplication
+    private static Matrix StupidMultiply(Matrix m1, Matrix m2)                  // Stupid matrix multiplication
     {
         if (m1.cols != m2.rows) throw new MException("Wrong dimensions of matrix!");
 
@@ -563,6 +539,29 @@ public class Matrix
                 for (int k = 0; k < m1.cols; k++)
                     result[i, j] += m1[i, k] * m2[k, j];
         return result;
+    }
+
+    private static Matrix Multiply(Matrix m1, Matrix m2)                         // Matrix multiplication
+    {
+        if (m1.cols != m2.rows) throw new MException("Wrong dimension of matrix!");
+        int msize = Math.Max(Math.Max(m1.rows, m1.cols), Math.Max(m2.rows, m2.cols));
+        // stupid multiplication faster for small matrices
+        if (msize < 32)
+        {
+            return StupidMultiply(m1, m2);
+        }
+        // stupid multiplication faster for non square matrices
+        if (!m1.IsSquare() || !m2.IsSquare()) {
+            return StupidMultiply(m1, m2);
+        }
+        // Strassen multiplication is faster for large square matrix 2^N x 2^N
+        // NOTE because of previous checks msize == m1.cols == m1.rows == m2.cols == m2.cols
+        double exponent = Math.Log(msize) / Math.Log(2);
+        if (Math.Pow(2,exponent) == msize) {
+            return StrassenMultiply(m1, m2);
+        } else {
+            return StupidMultiply(m1, m2);
+        }
     }
     private static Matrix Multiply(double n, Matrix m)                          // Multiplication by constant n
     {
@@ -615,7 +614,7 @@ public class Matrix
     { return Matrix.Add(m1, -m2); }
 
     public static Matrix operator *(Matrix m1, Matrix m2)
-    { return Matrix.StrassenMultiply(m1, m2); }
+    { return Matrix.Multiply(m1, m2); }
 
     public static Matrix operator *(double n, Matrix m)
     { return Matrix.Multiply(n, m); }
