@@ -1,4 +1,4 @@
-# LightweightMatrixC\#
+# LightweightMatrixC\# 
 
 ## Preface
 Lightweight fast matrix class in C# based on [http://blog.ivank.net/](http://blog.ivank.net/).  
