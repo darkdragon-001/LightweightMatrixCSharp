@@ -63,8 +63,8 @@ public class Matrix
 
     public double this[int iRow, int iCol]      // Access this matrix as a 2D array
     {
-        get { return mat[iRow * rows + iCol]; }
-        set { mat[iRow * rows + iCol] = value; }
+        get { return mat[iRow * cols + iCol]; }
+        set { mat[iRow * cols + iCol] = value; }
     }
 
     public Matrix GetCol(int k)
