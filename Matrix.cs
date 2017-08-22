@@ -202,7 +202,7 @@ namespace LightweightMatrixCSharp {
             }
             return inv;
         }
-	public double Dot(Matrix b)              //Function returns the dot product A.dot(b)
+	public double Dot(Matrix b)              //Function returns the dot product A.Dot(b)
         {
             double dot = 0;
             if (this.cols != b.cols || this.rows != b.rows)
