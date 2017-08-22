@@ -202,7 +202,25 @@ namespace LightweightMatrixCSharp {
             }
             return inv;
         }
-
+	public double Dot(Matrix b)              //Function returns the dot product A.Dot(b)
+        {
+            double dot = 0;
+            if (this.cols != b.cols || this.rows != b.rows)
+            {
+                return dot;
+            }
+            else
+            {
+                for (int i = 0; i < this.cols; ++i)
+                {
+                    for (int j = 0; j < this.rows; ++j)
+                    {
+                        dot += this[i, j] * b[i, j];
+                    }
+                }
+            }
+            return dot; 
+        }
 
         public double Det()                         // Function for determinant
         {
