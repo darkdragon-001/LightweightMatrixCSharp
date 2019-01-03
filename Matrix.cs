@@ -37,7 +37,8 @@ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace LightweightMatrixCSharp {
+namespace LightweightMatrixCSharp
+{
     public class Matrix
     {
         public int rows;
@@ -54,6 +55,34 @@ namespace LightweightMatrixCSharp {
             rows = iRows;
             cols = iCols;
             mat = new double[rows * cols];
+        }
+
+        public Matrix(double[,] iMatrix, bool rowByRow = true)
+        {
+            rows = (rowByRow ? iMatrix.GetUpperBound(0) : iMatrix.GetUpperBound(1)) + 1;
+            cols = (rowByRow ? iMatrix.GetUpperBound(1) : iMatrix.GetUpperBound(0)) + 1;
+            mat = new double[rows * cols];
+
+            if (rowByRow)
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        mat[i * cols + j] = iMatrix[i, j];
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        mat[i * cols + j] = iMatrix[j, i];
+                    }
+                }
+            }
         }
 
         public Boolean IsSquare()
@@ -553,15 +582,19 @@ namespace LightweightMatrixCSharp {
                 return StupidMultiply(m1, m2);
             }
             // stupid multiplication faster for non square matrices
-            if (!m1.IsSquare() || !m2.IsSquare()) {
+            if (!m1.IsSquare() || !m2.IsSquare())
+            {
                 return StupidMultiply(m1, m2);
             }
             // Strassen multiplication is faster for large square matrix 2^N x 2^N
             // NOTE because of previous checks msize == m1.cols == m1.rows == m2.cols == m2.cols
             double exponent = Math.Log(msize) / Math.Log(2);
-            if (Math.Pow(2,exponent) == msize) {
+            if (Math.Pow(2, exponent) == msize)
+            {
                 return StrassenMultiply(m1, m2);
-            } else {
+            }
+            else
+            {
                 return StupidMultiply(m1, m2);
             }
         }
