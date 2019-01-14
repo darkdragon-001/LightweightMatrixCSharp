@@ -34,6 +34,7 @@
 */
 
 using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -54,6 +55,25 @@ namespace LightweightMatrixCSharp {
             rows = iRows;
             cols = iCols;
             mat = new double[rows * cols];
+        }
+
+        public Matrix(double[,] matrix, bool rowMajor = true)
+        {
+            if (rowMajor) {
+                rows = matrix.GetLength(0);
+                cols = matrix.GetLength(1);
+                mat = matrix.Cast<double>().ToArray();  // NOTE copies elements
+            } else {  // column-major
+                rows = matrix.GetLength(1);
+                cols = matrix.GetLength(0);
+                mat = new double[rows * cols];
+
+                for (int row = 0; row < rows; row++) {
+                    for (int col = 0; col < cols; col++) {
+                        this[row, col] = matrix[matrix.GetLowerBound(0) + col, matrix.GetLowerBound(1) + row];
+                    }
+                }
+            }
         }
 
         public Boolean IsSquare()
