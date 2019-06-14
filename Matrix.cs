@@ -119,6 +119,7 @@ namespace LightweightMatrixCSharp {
         {
             if (rows != cols) throw new MException("The matrix is not square!");
             if (rows != v.rows) throw new MException("Wrong number of results in solution vector!");
+            if (v.cols != 1) throw new MException("The solution vector v must be a column vector");
             if (L == null) MakeLU();
 
             Matrix b = new Matrix(rows, 1);
