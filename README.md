@@ -1,8 +1,30 @@
-# LightweightMatrixC\# 
+# LightweightMatrixC\#
 
 ## Preface
-Lightweight fast matrix class in C# based on [http://blog.ivank.net/](http://blog.ivank.net/lightweight-matrix-class-in-c-strassen-algorithm-lu-decomposition.html).  
+Lightweight fast matrix class in C# based on [http://blog.ivank.net/](http://blog.ivank.net/lightweight-matrix-class-in-c-strassen-algorithm-lu-decomposition.html).
 I also did some changes based on the comments on the original page.
+
+## Quickstart
+
+1. Clone the code from GitHub.
+
+```sh
+git clone https://github.com/Bonifatius94/LightweightMatrixCSharp
+cd LightweightMatrixCSharp
+```
+
+2. Compile the code and run unit tests against it.
+
+```sh
+dotnet build
+dotnet test
+```
+
+3. Run the performance benchmarks.
+
+```sh
+dotnet run --project FastMatrix.Net.Benchmark/FastMatrix.Net.Benchmark.csproj --configuration Release
+```
 
 ## Documentation
 All this is written in C#. `Parse()` and `ToString()` methods included. Matrix class can throw exceptions (MException).

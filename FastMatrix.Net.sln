@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastMatrix.Net", "FastMatri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastMatrix.Net.Test", "FastMatrix.Net.Test\FastMatrix.Net.Test.csproj", "{66FD708A-6720-4AFA-9387-6C18EB2E6832}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastMatrix.Net.Benchmark", "FastMatrix.Net.Benchmark\FastMatrix.Net.Benchmark.csproj", "{641F2CCF-86E5-47F9-80B0-F05DE33D8BDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{66FD708A-6720-4AFA-9387-6C18EB2E6832}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66FD708A-6720-4AFA-9387-6C18EB2E6832}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66FD708A-6720-4AFA-9387-6C18EB2E6832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{641F2CCF-86E5-47F9-80B0-F05DE33D8BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{641F2CCF-86E5-47F9-80B0-F05DE33D8BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{641F2CCF-86E5-47F9-80B0-F05DE33D8BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{641F2CCF-86E5-47F9-80B0-F05DE33D8BDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
